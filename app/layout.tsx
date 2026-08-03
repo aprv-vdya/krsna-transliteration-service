@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Image from "next/image";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,7 +28,26 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#F3E9D2]">
+        <div className="flex flex-col items-center">
+          <div className="flex flex-row items-center">
+            <Image src="radhakrsnaKTS.svg" alt="nn" height={80} width={80} />
+            <Image src="KTS.svg" alt="logo" height={150} width={150} />
+            <Image
+              src="srilaprabhupadaKTS.svg"
+              alt="sp"
+              height={70}
+              width={70}
+            />
+          </div>
+          <div className="font-cinzel font-bold max-w-md text-center">
+            In the service of H. D. G. A. C. Bhaktivedānta
+            <br />
+            Svāmi Prabhupāda.
+          </div>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }

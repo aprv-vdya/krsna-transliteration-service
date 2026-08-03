@@ -5,21 +5,30 @@
 "use client";
 import RightArrowButton from "@/components/RightArrowButton";
 import LeftArrowButton from "@/components/LeftArrowButton";
+import Accordion from "@/components/Accordion";
 
 export default function TransliterationService() {
   return (
     <div className="min-h-screen flex flex-col gap-20 items-center">
-      <div className="flex flex-col items-center">
-        {/* accordion */}
-        <div>
-          What is Kṛṣṇa transliteration service?- short description and a
-          tutorial video
-        </div>
-        <div>
-          Type in iast with your physical keyboard- short description of IASTify
-          and link to readme page
-        </div>
-      </div>
+      <Accordion>
+        <Accordion.Section>
+          <Accordion.Label>
+            What is Kṛṣṇa transliteration service?
+          </Accordion.Label>
+          <Accordion.Content>
+            Description and link to tutorial video
+          </Accordion.Content>
+        </Accordion.Section>
+
+        <Accordion.Section>
+          <Accordion.Label>
+            Type in IAST with your physical keyboard
+          </Accordion.Label>
+          <Accordion.Content>
+            Explanation of IASTify and link to readme file
+          </Accordion.Content>
+        </Accordion.Section>
+      </Accordion>
 
       <div className="flex flex-row items-center">
         <div>First textarea</div>

@@ -1,5 +1,7 @@
 "useClient";
 import { createContext, useContext, useState, type ReactNode } from "react";
+import NavDown from "./NavDown";
+import NavUp from "./NavUp";
 
 interface AccordionContextValue {
   open: boolean;
@@ -24,7 +26,7 @@ interface AccordionProps {
 }
 
 function Accordion({ children }: AccordionProps) {
-  return <div>{children}</div>;
+  return <div className="flex flex-col">{children}</div>;
 }
 
 interface SectionProps {
@@ -58,9 +60,14 @@ function Label({ children }: LabelProps) {
       type="button"
       onClick={toggle}
       aria-expanded={open}
-      className="w-full text-left"
+      className={`w-150 max-w-full text-left text-[#3C2F1E] flex flex-row items-center justify-between gap-4 border border-[#979082] ${
+        open ? "rounded-t-lg" : "rounded-lg"
+      } px-4 py-3 bg-[#C2BAA8] shadow-md hover:shadow-lg transition-shadow`}
     >
-      {children}
+      <span className="min-w-0 flex-1 wrap-break-word">{children}</span>
+      <span className="shrink-0">
+        {open ? <NavUp size={20} /> : <NavDown size={20} />}
+      </span>
     </button>
   );
 }
@@ -74,7 +81,11 @@ function Content({ children }: ContentProps) {
 
   if (!open) return null;
 
-  return <div>{children}</div>;
+  return (
+    <div className="border border-[#979082] rounded-b-lg bg-[#FAF5EB] px-4 py-3 text-[#4E3D26]">
+      {children}
+    </div>
+  );
 }
 
 Accordion.Section = Section;

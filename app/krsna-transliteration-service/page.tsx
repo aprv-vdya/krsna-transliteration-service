@@ -9,7 +9,7 @@ import Accordion from "@/components/Accordion";
 
 export default function TransliterationService() {
   return (
-    <div className="min-h-screen flex flex-col gap-20 items-center">
+    <div className="min-h-screen flex flex-col gap-20 items-center mt-5">
       <Accordion>
         <Accordion.Section>
           <Accordion.Label>

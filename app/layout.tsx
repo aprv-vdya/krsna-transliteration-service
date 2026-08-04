@@ -40,7 +40,7 @@ export default function RootLayout({
               width={70}
             />
           </div>
-          <div className="font-cinzel font-bold max-w-md text-center">
+          <div className="font-cinzel font-bold max-w-md text-center text-[#3C2F1E]">
             In the service of H. D. G. A. C. Bhaktivedānta
             <br />
             Svāmi Prabhupāda.

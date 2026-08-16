@@ -4,7 +4,7 @@ interface NavUpProps {
   size: number;
 }
 
-export default function NavDown({ size }: NavUpProps) {
+export default function NavUp({ size }: NavUpProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

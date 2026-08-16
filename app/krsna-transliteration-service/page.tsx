@@ -9,6 +9,7 @@ import Accordion from "@components/Accordion";
 import { useState } from "react";
 import * as mappings from "@constants/scripts";
 import { identifyChar } from "@utils/lookUp";
+import Keyman from "@components/Keyman";
 
 export default function TransliterationService() {
   const [leftInput, setLeftInput] = useState<string>("");
@@ -47,6 +48,7 @@ export default function TransliterationService() {
 
   return (
     <div className="min-h-screen flex flex-col gap-20 items-center mt-5">
+      <Keyman />
       <Accordion>
         <Accordion.Section>
           <Accordion.Label>

@@ -32,15 +32,27 @@ export default function TransliterationService() {
   const transliterateFromIast = (input: string) => {
     let tempOutput = "";
 
-    for (const char of input) {
-      const { category, key } = identifyChar(char);
-      if (key === null) {
-        if (char in mappings.specialChars) {
-          tempOutput += char;
-          continue;
-        }
+    let precedenceKeys = [];
 
-        return "invalid";
+    for (let i = 0; i < input.length - 1; i++) {
+      const twoChar = input.slice(i, i + 2);
+      const { key } = identifyChar(twoChar);
+      precedenceKeys.push(key);
+    }
+
+    for (let i = 0; i < input.length; i++) {
+      const str =
+        precedenceKeys[i] === null || i === input.length - 1
+          ? input[i]
+          : input.slice(i, i + 2);
+      const { category, key } = identifyChar(str);
+      if (key === null) {
+        if (mappings.specialChars.includes(str)) {
+          tempOutput += str;
+          continue;
+        } else {
+          return "invalid";
+        }
       }
       switch (category) {
         case "isIastLower":
@@ -50,6 +62,9 @@ export default function TransliterationService() {
         case "isIastNumeral":
           tempOutput += mappings.devanagari_numerals[key];
           break;
+      }
+      if (precedenceKeys[i] !== null) {
+        i++;
       }
     }
     const chars = tempOutput.split("");

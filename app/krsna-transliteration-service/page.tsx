@@ -23,7 +23,7 @@ export default function TransliterationService() {
     const handler = (e: Event) => {
       const value = (e.target as HTMLInputElement).value;
       setLeftInput(value);
-      setRightInput(transliterateFromIast(value));
+      setRightInput(transliterateToIast(value));
     };
     el.addEventListener("input", handler);
     return () => el.removeEventListener("input", handler);
@@ -89,16 +89,70 @@ export default function TransliterationService() {
     return output.join("");
   };
 
-  const transliterateToIast = () => {};
+  const transliterateToIast = (input: string) => {
+    const tempChars = [];
+    const chars = input.split("");
+    console.log(chars);
+
+    for (let i = 0; i < chars.length; i++) {
+      const { category, key } = identifyChar(chars[i]);
+      if (key === null) {
+        if (mappings.specialChars.includes(chars[i])) {
+          tempChars.push(chars[i]);
+        } else {
+          return "invalid";
+        }
+      } else if (
+        (category === "isDevanagariLetter" && (key < 17 || key === 50)) ||
+        category === "isDevanagariNumeral"
+      ) {
+        tempChars.push(chars[i]);
+      } else if (category === "isDevanagariMatra" && (key < 17 || key === 50)) {
+        tempChars.push(mappings.devanagari_letter[key]);
+      } else if (category === "isDevanagariMatra" && key >= 17 && key < 50) {
+        const { category, key } =
+          i + 1 <= chars.length - 1
+            ? identifyChar(chars[i + 1])
+            : { category: null, key: -1 };
+
+        tempChars.push(`${chars[i]}्`);
+
+        if (
+          !(
+            key === 0 ||
+            (category === "isDevanagariMatra" && key! < 15 && key! < 50)
+          )
+        ) {
+          tempChars.push("अ");
+        }
+        if (key === 0) {
+          i++;
+        }
+      }
+    }
+
+    console.log(tempChars);
+    let output = "";
+    for (let i = 0; i < tempChars.length; i++) {
+      const { category, key } = identifyChar(tempChars[i]);
+      if (category === null && key === null) {
+        output += tempChars[i];
+        continue;
+      }
+      switch (category) {
+        case "isDevanagariNumeral":
+          output += mappings.iast_numerals[key!];
+          break;
+        case "isDevanagariLetter":
+        case "isDevanagariMatra":
+          output += mappings.iast_lower[key!];
+          break;
+      }
+    }
+    return output;
+  };
 
   const transliterateAmongst = () => {};
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const input = event.target.value;
-
-    setLeftInput(input);
-    setRightInput(transliterateFromIast(input));
-  };
 
   return (
     <div className="min-h-screen flex flex-col gap-20 items-center mt-5">

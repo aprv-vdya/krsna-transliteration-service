@@ -48,6 +48,7 @@ export const iast_lower: Record<number, string> = {
   47: "ṣ",
   48: "s",
   49: "h",
+  50: "'",
 };
 
 export const iast_upper: Record<number, string> = {
@@ -165,6 +166,7 @@ export const devanagari_letter: Record<number, string> = {
   47: "ष्",
   48: "स्",
   49: "ह्",
+  50: "ऽ",
 };
 
 export const devanagari_matra: Record<number, string> = {
@@ -217,6 +219,7 @@ export const devanagari_matra: Record<number, string> = {
   47: "ष",
   48: "स",
   49: "ह",
+  50: "ऽ",
 };
 
 export const devanagari_numerals: Record<number, string> = {
@@ -282,6 +285,7 @@ export const bengali_letter: Record<number, string> = {
   47: "ষ্",
   48: "স্",
   49: "হ্",
+  50: "ঽ",
 };
 
 export const bengali_matra: Record<number, string> = {
@@ -334,6 +338,7 @@ export const bengali_matra: Record<number, string> = {
   47: "ষ",
   48: "স",
   49: "হ",
+  50: "ঽ",
 };
 
 export const bengali_numerals: Record<number, string> = {
@@ -377,7 +382,6 @@ export const specialChars: string[] = [
   ":",
   ";",
   '"',
-  "'",
   "<",
   ">",
   "/",

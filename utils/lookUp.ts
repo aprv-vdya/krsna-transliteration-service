@@ -51,6 +51,9 @@ addToMap(bengali_matra, "isBengaliMatra");
 addToMap(bengali_numerals, "isBengaliNumeral");
 
 export function identifyChar(char: string): CharMatch {
+  if (char === "्") {
+    return { category: null, key: 0 };
+  }
   return charMap.get(char) ?? { category: null, key: null };
 }
 // "ṛ" → {
